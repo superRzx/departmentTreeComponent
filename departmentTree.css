@@ -1,0 +1,120 @@
+.dt-left {
+  float: left;
+  width: 260px; 
+}
+.dt-left .dt-input-box {
+  overflow: hidden;
+  margin: 20px 0; 
+}
+.dt-left .dt-input-box .dt-btn {
+  float: left;
+  display: inline-block;
+  padding: 0 15px;
+  line-height: 33px;
+  height: 33px;
+  text-align: center;
+  color: #333;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-left: 8px;
+  font-size: 14px;
+  background-color: #fff; 
+}
+.dt-left .dt-input-box .dt-btn:hover {
+  cursor: pointer;
+  color: #666;
+  border: 1px solid #ccc; 
+}
+.dt-left .dt-input-box .dt-btn.dt-btn-add {
+  color: #FE5852;
+  padding-left: 30px;
+  background-image: url(img/dt-add.png);
+  background-position: 10px center;
+  background-repeat: no-repeat; 
+}
+.dt-left .dt-input-box .dt-btn.dt-btn-add:hover {
+  color: #FB7671; 
+}
+
+.sub-title {
+  font-size: 14px;
+  color: #333;
+  line-height: 35px;
+  height: 35px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+.sub-title:hover {
+  background-color: #D8D8D8;
+  cursor: pointer; 
+}
+.sub-title .dt-icon-arrow {
+  display: block;
+  float: left;
+  width: 14px;
+  height: 14px;
+  background-image: url(img/arrow-list.png);
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  margin: 10px 5px; 
+}
+.sub-title .dt-icon-arrow.active {
+  background-position: left top; 
+}
+.sub-title.selected {
+  background-color: #FE5852;
+  color: #fff; 
+}
+.sub-title.selected .dt-icon-arrow {
+  background-image: url(img/arrow-list-active.png); 
+}
+.sub-title .dt-icon-cp {
+  display: inline-block;
+  float: left;
+  width: 18px;
+  height: 16px;
+  background: url(img/icon-cp.png) left top no-repeat;
+  margin-top: 10px;
+  margin-right: 4px; 
+}
+.sub-title .dt-icon-file {
+  display: inline-block;
+  float: left;
+  width: 16px;
+  height: 13px;
+  background: url(img/icon-file.png) left top no-repeat;
+  margin-top: 11px;
+  margin-right: 4px; 
+}
+.sub-title .dt-icon-file.ml24 {
+  margin-left: 24px; 
+}
+.sub-title .dt-name {
+  float: left;
+  display: inline-block;
+  max-width: 150px;
+  height: 35px;
+  line-height: 35px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}
+.sub-title .dt-name-input {
+  float: left;
+  background-color: #fff;
+  color: #333;
+  max-width: 150px;
+  line-height: 17px;
+  height: 17px;
+  border: none;
+  font-size: 12px;
+  margin-top: 9px;
+  outline: none; 
+}
+
+.sub-list {
+  padding-left: 25px;
+  display: none; 
+}

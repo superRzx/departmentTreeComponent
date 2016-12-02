@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>部门树组件</title>
+  <link rel="stylesheet" type="text/css" href="departmentTree.css">
+  <style type="text/css">
+    body{
+      background-color: #E5E5E5;
+    }
+  </style>
+  <script type="text/javascript" src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    //模拟部门树数据
+    var dtTree = {"data":{"departmentList":[{"departmentList":[{"departmentList":[{"departmentList":[],"id":8,"name":"蝎子","num":0,"parentId":4},{"departmentList":[],"id":9,"name":"螃蟹","num":0,"parentId":4},{"departmentList":[],"id":10,"name":"金牛","num":0,"parentId":4}],"id":4,"name":"双子","num":0,"parentId":2},{"departmentList":[],"id":5,"name":"水平","num":0,"parentId":2}],"id":2,"name":"颠三倒四","num":0,"parentId":1},{"departmentList":[{"departmentList":[],"id":6,"name":"冰河","num":0,"parentId":3},{"departmentList":[],"id":7,"name":"白鸟","num":0,"parentId":3}],"id":3,"name":"摩羯","num":0,"parentId":1}],"id":1,"name":"测试一下2","num":0},"success":true};
+  </script>
+  <script type="text/javascript" src="departmentTree.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      window.dtLeft = new DepartmentTree($('.dt-list'), dtTree.data);
+      dtLeft.bindDbClick();  
+    })
+  </script>
+</head>
+<body>
+  <div class="dt-content clearfix">
+        <div class="dt-left">
+          <div class="dt-input-box">
+            <a class="dt-btn dt-btn-add">添加部门</a>
+            <a class="dt-btn dt-btn-edit">编辑</a>
+            <a class="dt-btn dt-btn-delete">删除</a>
+          </div>
+          <!-- <div class="dt-list">
+            <div class="sub-title selected">
+              <i class="dt-icon-arrow active"></i>
+              <i class="dt-icon-cp"></i>
+              <span class="dt-name">杭州慧顾网络科技有限公司</span>
+              <input class="dt-name-input" type="text" value="杭州慧顾网络科技有限公司">
+              <span class="sp-num">（100人）</span>
+            </div>
+            <div class="sub-list">
+              <div class="sub-item">
+                <div class="sub-title">
+                  <i class="dt-icon-arrow active"></i>
+                  <i class="dt-icon-file"></i>技术部
+                  <span class="sp-num">（18人）</span>
+                </div>
+                <div class="sub-list">
+                  <div class="sub-item">
+                    <div class="sub-title">
+                      <i class="dt-icon-file ml24"></i>平台技术部<span class="sp-num">（18人）</span>
+                    </div>
+                  </div>
+                  <div class="sub-item">
+                    <div class="sub-title">
+                      <i class="dt-icon-file ml24"></i>前端技术部<span class="sp-num">（18人）</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sub-item">
+                <div class="sub-title selec">
+                  <i class="dt-icon-file ml24"></i>共享事业部
+                  <span class="sp-num">（18人）</span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+          <div class="dt-list"></div>
+        </div>
+        <!-- dt-left end -->
+      </div>
+</body>
+</html>
