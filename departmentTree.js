@@ -1,13 +1,22 @@
 /* 树形图 */
 (function(){
+  var defaultOpt = {
+    data: '',
+    ele: '',
+    isDbClk: false,
+    timer: null
+  };
   /* 定义构造函数 */
-  function DepartmentTree(ele, data) {
-    this.originData = data;  //存储原始数据
-    this.parentNode = ele;   // ele: 传入想要渲染的父级容器
-    this.selectedNodeId = data.id;    // 保存当前选中的节点id
-    this.data = new Array(data);   //将传入的数据保存进数组
+  function DepartmentTree(opt) {
+    var objOpt = $.extend(defaultOpt, opt);
+
+    this.isDbClk = objOpt.isDbClk;  //是否支持双击修改名称
+    this.originData = objOpt.data;  //存储原始数据
+    this.parentNode = objOpt.ele;   // ele: 传入想要渲染的父级容器
+    this.selectedNodeId = objOpt.data.id;    // 保存当前选中的节点id
+    this.data = new Array(objOpt.data);   //将传入的数据保存进数组
     this.timer = null;
-    this.init();    
+    this.init();
   }
 
   DepartmentTree.prototype = {
@@ -18,9 +27,14 @@
       this.renderDepartmentTree(_this.parentNode, _this.data);
       this.treeStatusInit();
       this.eventHandler();
+      if(this.isDbClk) {
+        this.bindDbClick();
+      }
+      this.inputBlur();
+      this.deleteClk();
     },
 
-    // 渲染整颗树
+    // 根据传入的数据渲染整颗树
     renderDepartmentTree: function(ele, data) {
       var _this = this;
       if(data.length !== 0) {
@@ -79,26 +93,6 @@
         }
       })
 
-      //光标失去焦点修改名称
-      parentNode.on('blur', '.dt-name-input', function() {
-        var textValue = $(this).val();
-        if(textValue === '') {
-          if($(this).parent('.sub-title').attr('propid') == -1) {
-            $(this).parent().parent().remove();
-          } else{
-            $(this).focus();
-            if($('.jconfirm-msg').length === 0) {
-              //alert('请输入分组名称');  
-            }
-            return;  
-          }
-          
-        }
-        //$(this).siblings('.dt-name').show().html(textValue);
-        //$(this).remove();
-      })
-
-
       //添加部门按钮
       $('.dt-btn-add').on('click', function() {
         var selectedDomNode = _this.selectedDomNode;
@@ -124,18 +118,11 @@
       //编辑部门按钮
       $('.dt-btn-edit').on('click', function() {
         var selectedDomNode = _this.selectedDomNode;
-        selectedDomNode.find('.dt-name').trigger('dblclick');
-      })
-
-      //点击删除按钮
-      $('.dt-btn-delete').on('click', function() {
-        var selectedDomNode = _this.selectedDomNode;
-        if(selectedDomNode.find('.dt-icon-cp').length !== 0) {
-          alert('无法删除根节点');
-          return;
-        }
-        /*selectedDomNode.parent('.sub-item').remove();
-        _this.treeStatusInit();*/
+        var dtName = selectedDomNode.find('.dt-name');
+        var subNameInput = $('<input type="text" class="dt-name-input">').val(dtName.html()).width(_this.countInputWidth());
+        dtName.after(subNameInput);
+        subNameInput.select();
+        dtName.hide();
       })
 
       //点击部门切换状态
@@ -156,6 +143,54 @@
       })
     },
 
+    //点击删除按钮，删除所选部门
+    deleteClk: function(cb) {
+      var _this = this;
+      $('.dt-btn-delete').on('click', function() {
+        var selectedDomNode = _this.selectedDomNode;
+        if(selectedDomNode.find('.dt-icon-cp').length !== 0) {
+          alert('无法删除根节点');
+          return;
+        } else {
+          if(cb) {
+            cb();
+          } else {
+            selectedDomNode.parent('.sub-item').remove();
+            _this.treeStatusInit();
+          }
+        }
+      })
+    },
+
+    //光标失去焦点事件
+    inputBlur: function(cb) {
+      var _this = this;
+      _this.parentNode.off('blur').on('blur', '.dt-name-input', function() {
+        var textValue = $(this).val();
+        if(textValue === '') {
+          if($(this).parent('.sub-title').attr('propid') == -1) {
+            $(this).parent().parent().remove();
+          } else{
+            $(this).focus();
+            if($('.jconfirm-msg').length === 0) {
+              //alert('请输入分组名称');  
+            }
+            return;  
+          }
+        } else {
+          if(cb) {
+            cb();
+          } else {
+            $(this).siblings('.dt-name').show().html(textValue);
+            $(this).remove();
+          }
+        }
+        //$(this).siblings('.dt-name').show().html(textValue);
+        //$(this).remove();
+      })
+    },
+
+    //是否支持双击时间
     bindDbClick: function() {
       var _this = this;
       _this.parentNode.on('dblclick', '.dt-name', function(e) {
@@ -195,7 +230,6 @@
       }
 
       return result;
-
     } 
 
   }

@@ -17,8 +17,14 @@
   <script type="text/javascript" src="departmentTree.js"></script>
   <script type="text/javascript">
     $(function() {
-      window.dtLeft = new DepartmentTree($('.dt-list'), dtTree.data);
-      dtLeft.bindDbClick();  
+      var opt = {
+        data: dtTree.data,
+        ele: $('.dt-list')
+      }
+      window.dtLeft = new DepartmentTree(opt);
+      dtLeft.inputBlur(function() {
+        alert(11);
+      });
     })
   </script>
 </head>
