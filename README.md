@@ -1,5 +1,6 @@
-#通过 构造函数+原型的方式 实现部门树公用组件\<br>  
-##工具库为jquery\<br>
+#通过 构造函数+原型的方式 实现部门树公用组件  \<br>  
+##工具库为jquery  \<br>
+
 
 ![image](https://github.com/superRzx/departmentTreeComponent/blob/master/img/design.png "效果图")
 
