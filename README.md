@@ -12,7 +12,7 @@ var opt = {
   ele: $('.dt-list')
 }
 var dtLeft = new DepartmentTree(opt);
-
+```
 ##api    
 * `bindDbClick()` 是否需要支持双击编辑部门名称功能
 * `inputBlur(cb)`  cb:传入回调函数，在绑定光标离开焦点事件的时候执行cb
